@@ -1,9 +1,10 @@
 ﻿namespace EVSResultsApi.Models
 {
-    public class Pitch
+    public class pitch
     {
         public int Id { get; set; }
         public string Name { get; set; }
+
 
     }
 }
