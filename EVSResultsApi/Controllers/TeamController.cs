@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EVSResultsApi.Models;
+using EVSResultsApi.Models.CreateModels;
 using EVSResultsApi.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +29,7 @@ namespace EVSResultsApi.Controllers
         }
 
         [HttpGet("{id}", Name = "Get")]
-        public ActionResult Get(int id)
+        public ActionResult GetById(int id)
         {
             var result = _repo.GetTeamById(id);
             
@@ -41,14 +42,12 @@ namespace EVSResultsApi.Controllers
 
         // POST: api/Team
         [HttpPost]
-        public IActionResult Post([FromBody] string value)
+        public IActionResult Post([FromBody] CreateTeamModel team)
         {
-            var team = new Team()
-            {
-                Country = "Sverige"
-            };
-            return Ok(_repo.CreateTeam(team));
-        }
+            var result = _repo.CreateTeam(team);
+
+            return CreatedAtAction(nameof(GetById), new { id = result.Id }, result);
+       }
 
         // PUT: api/Team/5
         [HttpPut("{id}")]

@@ -2,6 +2,7 @@
 using System.Linq;
 using EVSResultsApi.DataAccess;
 using EVSResultsApi.Models;
+using EVSResultsApi.Models.CreateModels;
 
 namespace EVSResultsApi.Repository
 {
@@ -14,18 +15,19 @@ namespace EVSResultsApi.Repository
             _sqLiteDbContext = sqLiteDbContext;
         }
         
-        public Team CreateTeam(Team teamToCreate)
+        public Team CreateTeam(CreateTeamModel teamToCreate)
         {
-            var createdTeam = new Team();
-             
-                 _sqLiteDbContext.Teams.Add(teamToCreate);
+            var teamModel = new Team()
+            {
+                Country = teamToCreate.Country,
+                ImageUrl = teamToCreate.ImageUrl,
+                Name = teamToCreate.Name
+            };
+            
+            var result = _sqLiteDbContext.Teams.Add(teamModel);
                 _sqLiteDbContext.SaveChanges();
-
-                createdTeam = _sqLiteDbContext.Teams
-                    .OrderBy(b => b.Id)
-                    .First();
-
-                return createdTeam;
+            
+                return result.Entity;
         }
 
         public Team GetTeamById(int id)
