@@ -11,5 +11,6 @@ namespace EVSResultsApi.Repository
         Team GetTeamById(int id);
         List<Team> GetTeams();
         void DeleteTeam(int id);
+        void SaveMatchResult(string XmlData);
     }
 }

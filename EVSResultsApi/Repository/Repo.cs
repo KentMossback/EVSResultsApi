@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using EVSResultsApi.DataAccess;
+using EVSResultsApi.Mappers;
 using EVSResultsApi.Models;
 using EVSResultsApi.Models.CreateModels;
 
@@ -9,10 +10,12 @@ namespace EVSResultsApi.Repository
     public class Repo : IRepo
     {
         private readonly ISQLiteDBContext _sqLiteDbContext;
+        private readonly IXmlMapper _xmlMapper;
 
-        public Repo(ISQLiteDBContext sqLiteDbContext)
+        public Repo(ISQLiteDBContext sqLiteDbContext, IXmlMapper xmlMapper)
         {
             _sqLiteDbContext = sqLiteDbContext;
+            _xmlMapper = xmlMapper;
         }
         
         public Team CreateTeam(CreateTeamModel teamToCreate)
@@ -43,6 +46,13 @@ namespace EVSResultsApi.Repository
         public void DeleteTeam(int id)
         {
             throw new System.NotImplementedException();
+        }
+
+        public void SaveMatchResult(string XmlData)
+        {
+            var xmlResults = _xmlMapper.MatchXmlConvert(XmlData);
+            var re = xmlResults;
+
         }
     }
 }

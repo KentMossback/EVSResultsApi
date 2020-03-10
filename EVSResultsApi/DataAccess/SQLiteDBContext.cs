@@ -8,7 +8,7 @@ namespace EVSResultsApi.DataAccess
         public SQLiteDBContext(DbContextOptions<SQLiteDBContext> options) : base(options) { }
 
         public DbSet<Group> Groups { get; set; }
-        public DbSet<pitch> Pitches { get; set; }
+        public DbSet<Pitch> Pitches { get; set; }
         public DbSet<Team> Teams { get; set; }
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -31,8 +31,8 @@ namespace EVSResultsApi.DataAccess
             });
 
             // Map table names
-            modelBuilder.Entity<pitch>().ToTable("Pitch", "evs");
-            modelBuilder.Entity<pitch>(entity =>
+            modelBuilder.Entity<Pitch>().ToTable("Pitch", "evs");
+            modelBuilder.Entity<Pitch>(entity =>
             {
                 entity.HasKey(e => e.Id);
                 //entity.HasIndex(e => e.Title).IsUnique();

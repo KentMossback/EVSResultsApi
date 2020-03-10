@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using System.Threading.Tasks;
+using EVSResultsApi.Repository;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Diagnostics;
 
 namespace EVSResultsApi.Controllers
 {
@@ -13,6 +8,13 @@ namespace EVSResultsApi.Controllers
     [ApiController]
     public class FileController : ControllerBase
     {
+        private readonly IRepo _repo;
+
+
+        public FileController(IRepo repo)
+        {
+            _repo = repo;
+        }
 
         [HttpGet]
         public ActionResult Get()
@@ -45,6 +47,7 @@ namespace EVSResultsApi.Controllers
             //    // Process uploaded files
             //    // Don't rely on or trust the FileName property without validation.
             
+            _repo.SaveMatchResult(xmlFile);
             return Ok();
             //    return Ok("EVS file upload get method " + new { count = files.Count, size});
         }

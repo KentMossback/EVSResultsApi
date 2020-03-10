@@ -2,7 +2,7 @@
 
 namespace EVSResultsApi.Models
 {
-    public class pitch
+    public class Pitch
     {
         [Key]
         public int Id { get; set; }

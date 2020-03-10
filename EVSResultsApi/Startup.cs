@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using EVSResultsApi.DataAccess;
+using EVSResultsApi.Mappers;
 using EVSResultsApi.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,7 +36,7 @@ namespace EVSResultsApi
                 .UseSqlite("Filename=EVSResultsDatabase.db",
                     op => { op.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName); }));
             services.AddScoped<ISQLiteDBContext, SQLiteDBContext>();
-
+            services.AddScoped<IXmlMapper, XmlMapper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
