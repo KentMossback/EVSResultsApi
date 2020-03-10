@@ -52,6 +52,8 @@ namespace EVSResultsApi
 
             app.UseAuthorization();
 
+
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
