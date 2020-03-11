@@ -50,6 +50,7 @@ namespace EVSResultsApi.Repository
 
         public void SaveMatchResult(string XmlData)
         {
+            //Transform xml object before saving it
             var xmlResults = _xmlMapper.MatchXmlConvert(XmlData);
             var re = xmlResults;
 
