@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EVSResultsApi.Controllers
 {
+    [Route("[controller]")]
+
     public class HomeController : Controller
     {
         public IActionResult Index()
